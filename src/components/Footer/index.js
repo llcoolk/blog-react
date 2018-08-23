@@ -1,13 +1,14 @@
 import React from "react";
+import "./style.css";
 
 const Footer = () => (
   <footer>
     <div className="container">
       <div className="row">
         <div className="col-md-6">
-          <p>&copy; 2018 Leen's Blog, all rights reserved!</p>
+          <p>&copy; 2018 Leen's Blog, All rights reserved!</p>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 social-media">
           <a href="http://facebook.com" target="_blank">
             facebook
           </a>
