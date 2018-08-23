@@ -5,9 +5,16 @@ import Axios from "axios";
 
 class BlogAdd extends Component {
   state = {
-    posts: [],
-    isLoaded: false
+    title: "",
+    description: "",
+    imageUrl: "",
+    UserId: ""
   };
+
+  handleTitleChange = this.handleTitleChange.bind(this);
+  handleDescriptionChange = this.handleDescriptionChange.bind(this);
+  handleUrlChange = this.handleUrlChange.bind(this);
+  handleUserIdChange = this.handleUserIdChange.bind(this);
 
   // componentDidMount() {
   //   Axios.get(`http://localhost:8081/posts`).then(res => {
@@ -15,14 +22,24 @@ class BlogAdd extends Component {
   //     this.setState({ posts: res.data });
   //   });
   // }
-  hangleChange = event => {
+
+  handleTitleChange = event => {
     this.setState({ title: event.target.value });
+  };
+
+  handleDescriptionChange = event => {
     this.setState({ description: event.target.value });
+  };
+
+  handleUrlChange = event => {
     this.setState({ imageUrl: event.target.value });
+  };
+
+  handleUserIdChange = event => {
     this.setState({ UserId: event.target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmitChange = event => {
     event.preventDefault();
 
     const newPost = {
@@ -55,7 +72,7 @@ class BlogAdd extends Component {
         </label>
         <label>
           Image Upload:
-          <input type="text" name="ImageUrl" onChange={this.handleChange} />
+          <input type="text" name="imageUrl" onChange={this.handleChange} />
         </label>
         <label>
           UserId:
