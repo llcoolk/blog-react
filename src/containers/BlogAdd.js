@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Jumbotron from "../components/Jumbotron/";
-import Card from "../components/Card";
 import Axios from "axios";
 
 class BlogAdd extends Component {
@@ -11,11 +9,6 @@ class BlogAdd extends Component {
     UserId: ""
   };
 
-  handleTitleChange = this.handleTitleChange.bind(this);
-  handleDescriptionChange = this.handleDescriptionChange.bind(this);
-  handleUrlChange = this.handleUrlChange.bind(this);
-  handleUserIdChange = this.handleUserIdChange.bind(this);
-
   // componentDidMount() {
   //   Axios.get(`http://localhost:8081/posts`).then(res => {
   //     console.log(res);
@@ -23,24 +16,28 @@ class BlogAdd extends Component {
   //   });
   // }
 
-  handleTitleChange = event => {
-    this.setState({ title: event.target.value });
+  handleChange = e => {
+    this.setState({ ...this.state, [e.target.name]: e.target.value });
   };
 
-  handleDescriptionChange = event => {
-    this.setState({ description: event.target.value });
-  };
+  // onTitleChange = event => {
+  //   this.setState({ title: event.target.value });
+  // };
 
-  handleUrlChange = event => {
-    this.setState({ imageUrl: event.target.value });
-  };
+  // onDescChange = event => {
+  //   this.setState({ description: event.target.value });
+  // };
 
-  handleUserIdChange = event => {
-    this.setState({ UserId: event.target.value });
-  };
+  // onUrlChange = event => {
+  //   this.setState({ imageUrl: event.target.value });
+  // };
 
-  handleSubmitChange = event => {
-    event.preventDefault();
+  // onUserIdChange = event => {
+  //   this.setState({ UserId: event.target.value });
+  // };
+
+  onSubmit = e => {
+    e.preventDefault();
 
     const newPost = {
       title: this.state.title,
@@ -49,36 +46,60 @@ class BlogAdd extends Component {
       UserId: this.state.UserId
     };
 
-    Axios.post(`http://localhost:8081/posts`, { newPost }).then(res => {
+    Axios.post("http://localhost:8081/posts", newPost).then(res => {
       console.log(res);
       console.log(res.data);
+      res.data.PostId > 0 ? this.props.history.push("/blog") : "";
     });
   };
 
   render() {
+    // console.log(this.props);
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form>
         <label>
           Title:
-          <input type="text" name="title" onChange={this.handleChange} />
-        </label>
-        <label>
-          Description:
           <input
-            type="textArea"
-            name="description"
+            type="text"
+            name="title"
+            value={this.state.title}
             onChange={this.handleChange}
           />
         </label>
+        <br />
+
+        <label>
+          Description:
+          <textarea
+            name="description"
+            value={this.state.description}
+            onChange={this.handleChange}
+          />
+        </label>
+        <br />
         <label>
           Image Upload:
-          <input type="text" name="imageUrl" onChange={this.handleChange} />
+          <input
+            type="text"
+            name="imageUrl"
+            value={this.state.imageUrl}
+            onChange={this.handleChange}
+          />
         </label>
+        <br />
+
         <label>
           UserId:
-          <input type="number" name="UserId" onChange={this.handleChange} />
+          <input
+            type="number"
+            name="UserId"
+            value={this.state.UserId}
+            onChange={this.handleChange}
+          />
         </label>
-        <button type="submit">Add New Post</button>
+        <br />
+
+        <button onClick={this.onSubmit}>Add New Post</button>
       </form>
     );
   }

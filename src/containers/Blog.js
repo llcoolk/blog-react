@@ -16,6 +16,21 @@ class Blog extends Component {
     });
   }
 
+  onDelete = post_id => {
+    Axios.delete(`http://localhost:8081/posts/${post_id}`)
+      .then(res => {
+        let newPosts = [];
+        this.state.posts.map(p => {
+          if (p.PostId !== post_id) {
+            newPosts.push(p);
+          }
+        });
+        console.log("newPosts:", newPosts);
+        this.setState({ posts: newPosts });
+      })
+      .catch(err => console.log("Something went wrong:", err));
+  };
+
   render() {
     return (
       <div className="container">
@@ -23,12 +38,14 @@ class Blog extends Component {
         {this.state.loading ? <h1>Loading...</h1> : ""}
 
         <div className="row">
-          {this.state.posts.map(post => (
-            <div key={post.PostId} className="col-md-4">
+          {this.state.posts.reverse().map(post => (
+            <div key={post.PostId} className="col-md-6">
               <Card
+                post_id={post.PostId}
                 title={post.title}
                 description={post.description}
                 imageUrl={post.imageUrl}
+                onDelete={this.onDelete}
               />
             </div>
           ))}
