@@ -27,6 +27,7 @@ class Blog extends Component {
         });
         console.log("newPosts:", newPosts);
         this.setState({ posts: newPosts });
+        this.props.history.pus("/blog");
       })
       .catch(err => console.log("Something went wrong:", err));
   };
