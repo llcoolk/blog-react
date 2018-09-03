@@ -23,6 +23,13 @@ const Footer = () => (
           >
             instagram
           </a>
+          <a
+            href="http://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            twitter
+          </a>
         </div>
       </div>
     </div>

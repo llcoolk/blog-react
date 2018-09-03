@@ -94,7 +94,7 @@ class BlogUpdate extends Component {
         </label>
         <br />
 
-        <label>
+        {/* <label>
           UserId:
           <input
             type="number"
@@ -103,7 +103,7 @@ class BlogUpdate extends Component {
             onChange={this.handleChange}
           />
         </label>
-        <br />
+        <br /> */}
 
         <button type="submit" onClick={this.onSubmit}>
           Update Post
